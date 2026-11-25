@@ -12,7 +12,7 @@
 Servers/
 
 # DB 접속 정보 (예시 파일만 커밋)
-**/db.properties
+**/dbinfo.properties
 
 # OS / 로그
 .DS_Store
