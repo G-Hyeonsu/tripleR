@@ -17,9 +17,10 @@
 				<input type="checkbox" id="rememberCheck">아이디 저장하기
 			</label>
 			<input type="submit" value="로그인">
-			<a href="Login.jsp">리뷰어 로그인으로 돌아가기</a>
+			<a href="LoginForReviewer.jsp">리뷰어 로그인으로 돌아가기</a>
+			
 			<div class="link-group">
-                    회원이 아니시라면<a href="<%= request.getContextPath() %>/WEB-INF/user/Register.jsp">회원가입</a>
+                    회원이 아니시라면<a href="<%= request.getContextPath() %>/webapp/UserLogin/SignUpForStore.jsp">회원가입</a>
             </div>
 		</form>
 	</div>

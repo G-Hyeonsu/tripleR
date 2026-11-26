@@ -8,5 +8,9 @@
 </head>
 <body>
 <h1>어서오세요, 님!</h1>
+<div class="searchPage">
+
+</div>
+<div class="invitedPage"></div>
 </body>
 </html>

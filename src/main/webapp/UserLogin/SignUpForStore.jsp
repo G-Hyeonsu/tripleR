@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SignUp_reviewer</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/SignUp.css">
+<title>Insert title here</title>
 </head>
 <body>
 <main>
 <div class="form-container">
             <form class="signup-form" action="<%= request.getContextPath() %>/user/register" method="post" enctype="multipart/form-data">
-                <h1>리뷰어 회원가입 하기</h1>
+                <h1>회원가입</h1>
 
                 <div class="form-group">
                     <label for="profile-image">프로필 이미지</label>
