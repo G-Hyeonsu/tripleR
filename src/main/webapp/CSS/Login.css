@@ -5,6 +5,8 @@ body {
 }
 
 .formContainer{
+	width: 300px;
+	height: 500px;
 	padding: 40px;
 	box-sizing: bordeer-box;
 	border: 1px solid #6A24FE;

@@ -24,9 +24,9 @@
 			
 			<input type="submit" value="로그인">
 			
-			<a href="<%= request.getContextPath() %>/webapp/UserLogin/SignUpForReviewer.jsp">리뷰어 회원가입 하기</a>
+			<a href="<%= request.getContextPath() %>/UserLogin/SignUpForReviewer.jsp">리뷰어 회원가입 하기</a>
 			
-			<a href="LoginForStore.jsp">사장님 로그인 하기</a>
+			<a href="<%= request.getContextPath() %>/UserLogin/LoginForStore.jsp">사장님 로그인 하기</a>
 		</form>
 	</div>
 </main>
