@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>DBP_02_07</groupId>
 	<artifactId>tripleR</artifactId>
@@ -13,6 +13,7 @@
 		<oracle-jdbc-driver.version>21.3.0.0</oracle-jdbc-driver.version>
 		<commons-dbcp2.version>2.9.0</commons-dbcp2.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<logback-classic.version>1.2.6</logback-classic.version>
 	</properties>
 
 	<dependencies>
@@ -36,8 +37,15 @@
 			<version>6.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
+		</dependency>
 	</dependencies>
-
+	
+	
 	<build>
 		<plugins>
 			<plugin>
