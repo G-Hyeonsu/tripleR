@@ -1,0 +1,21 @@
+package controller.reviewer;
+
+import controller.Controller;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class TempController implements Controller {
+    private String forwardUrl;
+
+    public TempController(String forwardUrl) {
+        if (forwardUrl == null) {
+            throw new NullPointerException("forwardUrl is null. 이동할 URL을 입력하세요.");
+        }
+        this.forwardUrl = forwardUrl;
+    }
+
+    @Override
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        return forwardUrl;
+    }
+}
