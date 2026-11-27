@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>hi</title>
+<title>Reviewer Page</title>
 </head>
 <body>
-do it again!!
+<h1>어서오세요, 님!</h1>
+<div class="searchPage">
+
+</div>
+<div class="invitedPage"></div>
 </body>
 </html>
