@@ -1,1 +1,22 @@
 /target/
+# 빌드 결과물
+/build/
+/target/
+/bin/
+*.class
+*.war
+
+# 이클립스 개인 설정
+.settings/
+.classpath
+.project
+.metadata/
+Servers/
+
+# DB 접속 정보 (예시 파일만 커밋)
+**/dbinfo.properties
+
+# OS / 로그
+.DS_Store
+Thumbs.db
+*.log
