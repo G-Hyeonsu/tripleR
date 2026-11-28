@@ -15,16 +15,17 @@ public class ReservationDAO {
 		jdbcUtil = new JDBCUtil();		
 	}
 
-	//예약 등록
+	// 예약 등록
+	// : reservation_id는 시퀀스로 등록
+	// : reservation_status는 기본 값 ‘R’로 등록
 	public int insertReservation(Reservation reservation) {
-		String sql = "INSERT INTO RESERVATION (RESERVATION_ID, RESERVATION_DATE, " + 
-				"RESERVATION_STATUS, REVIEWER_ID, RESTAURANT_ID) VALUES (seq_reservation.NEXTVAL, ?, ?, ?, ?)";
+		String sql = "INSERT INTO reservation (reservation_id, restaurant_id, reviewer_id, reservation_date, reservation_status) "
+				     + "VALUES (seq_reservation.NEXTVAL, ?, ?, ?, 'R')";
 		Object[] param =  new Object[] {
-				reservation.getReservationDate(),
-				reservation.getReservationStatus(), 
+				reservation.getRestaurantId(),
 				reservation.getReviewerId(), 
-				reservation.getRestaurantId()
-			};   
+				reservation.getReservationDate() };
+		
 		jdbcUtil.setSqlAndParameters(sql, param);
 		
 		try {
@@ -40,9 +41,9 @@ public class ReservationDAO {
     	return 0;
     } 
 	
-	// 예약 확인
-	public List<Reservation> checkReservation(String reviewerId) {
-		String sql =  "SELECT * FROM Reservation WHERE REVIEWER_ID = ?";
+	// 리뷰어 아이디로 특정 리뷰어의 예약 내역 조회
+	public List<Reservation> findReservationByReviewerId(String reviewerId) {
+		String sql =  "SELECT * FROM reservation WHERE reviewer_id = ?";
 		jdbcUtil.setSqlAndParameters(sql,  new Object[] {reviewerId});
 		List<Reservation> list = new ArrayList<Reservation>();
 		try {
@@ -51,11 +52,11 @@ public class ReservationDAO {
 			 while (rs.next()) {
 	             Reservation reservation = new Reservation();
 
-	             reservation.setReservationId(rs.getInt("RESERVATION_ID"));
-	             reservation.setReservationDate(rs.getObject("RESERVATION_DATE", LocalDateTime.class));
-	             reservation.setReservationStatus(rs.getString("RESERVATION_STATUS"));
-	             reservation.setReviewerId(rs.getString("REVIEWER_ID"));
-	             reservation.setRestaurantId(rs.getString("RESTAURANT_ID"));
+	             reservation.setReservationId(rs.getInt("reservation_id"));
+	             reservation.setReservationDate(rs.getObject("reservation_date", LocalDateTime.class));
+	             reservation.setReservationStatus(rs.getString("reservation_status"));
+	             reservation.setReviewerId(rs.getString("reviewer_id"));
+	             reservation.setRestaurantId(rs.getString("restaurant_id"));
 
 	             list.add(reservation);
 	        }
@@ -69,64 +70,77 @@ public class ReservationDAO {
     	return list;
     } 
 	
-	// 예약 수정
-	public int modifyReservation(Reservation reservation) {
-		String sql = "UPDATE RESERVATION SET RESERVATION_DATE = ?, RESERVATION_STATUS = ?, "+
-				"REVIEWER_ID = ?, RESTAURANT_ID = ? WHERE RESERVATION_ID = ?";
-		Object[] param =  new Object[] {
-				reservation.getReservationDate(), 
-				reservation.getReservationStatus(),
-				reservation.getReviewerId(), 
-				reservation.getRestaurantId(), 
-				reservation.getReservationId()
-				};   
-		jdbcUtil.setSqlAndParameters(sql, param);
-		
+	// 식당 아이디로 특정 식당의 예약 내역 조회
+	public List<Reservation> findReservationByRestaurantId(String restaurantId) {
+		String sql =  "SELECT * FROM reservation WHERE restaurant_id = ?";
+		jdbcUtil.setSqlAndParameters(sql,  new Object[] {restaurantId});
+		List<Reservation> list = new ArrayList<Reservation>();
 		try {
-			int result = jdbcUtil.executeUpdate(); 
+			 ResultSet rs = jdbcUtil.executeQuery();
+			 
+			 while (rs.next()) {
+	             Reservation reservation = new Reservation();
+
+	             reservation.setReservationId(rs.getInt("reservation_id"));
+	             reservation.setReservationDate(rs.getObject("reservation_date", LocalDateTime.class));
+	             reservation.setReservationStatus(rs.getString("reservation_status"));
+	             reservation.setReviewerId(rs.getString("reviewer_id"));
+	             reservation.setRestaurantId(rs.getString("restaurant_id"));
+
+	             list.add(reservation);
+	        }
+
+	        return list;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		
+		}
+    	return list;
+    }
+	
+	// 예약 날짜 수정
+	public int updateReservationDate(int reservationId, LocalDateTime reservationDate) {
+		String sql = "UPDATE reservation SET reservation_date = ? WHERE reservation_id = ?";
+		Object[] param = new Object[] { reservationDate, reservationId };
+		jdbcUtil.setSqlAndParameters(sql, param);
+
+		try {
+			int result = jdbcUtil.executeUpdate();
 			jdbcUtil.commit();
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		
+			jdbcUtil.close();
 		}
-    	return 0;
-    }
-	
-	// 예약 취소 (예약 삭제 아님!)
-	public int deleteReservation(int reservationId) {
-	    String sql = "UPDATE RESERVATION "
-	               + "SET RESERVATION_STATUS = ? "
-	               + "WHERE RESERVATION_ID = ?";
-
-	    Object[] param = new Object[] {
-	        "C",
-	        reservationId
-	    };
-
-	    jdbcUtil.setSqlAndParameters(sql, param);
-
-	    try {
-	        int result = jdbcUtil.executeUpdate();
-	        jdbcUtil.commit();
-	        return result;
-
-	    } catch (Exception ex) {
-	        jdbcUtil.rollback();
-	        ex.printStackTrace();
-
-	    } finally {
-	        jdbcUtil.close();
-	    }
-
-	    return 0;
+		return 0;
 	}
 	
-	// 삭제
+	// 예약 상태 수정
+	public int updateReservationStatus(int reservationId, String reservationStatus) {
+		String sql = "UPDATE reservation SET reservation_status = ? WHERE reservation_id = ?";
+		Object[] param = new Object[] { reservationStatus, reservationId };
+		jdbcUtil.setSqlAndParameters(sql, param);
+
+		try {
+			int result = jdbcUtil.executeUpdate();
+			jdbcUtil.commit();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+	
+	// 예약 삭제
+	// : 예약 삭제 시 해당 예약의 reservation_id를 PK로 참조하는 Review와 ReviewerScore를 함께 삭제해야함(ON DELETE CASCADE)
 	public int deleteReservation(String reservationId) {
-		String sql =  "DELETE FROM Reservation WHERE RESERVATION_ID = ? ";   
+		String sql =  "DELETE FROM reservation WHERE reservation_id = ? ";   
 		jdbcUtil.setSqlAndParameters(sql,  new Object[] {reservationId});
 		
 		try {

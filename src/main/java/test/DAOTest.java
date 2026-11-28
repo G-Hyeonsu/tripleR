@@ -74,7 +74,7 @@ public class DAOTest {
 
 		// 4. 리뷰어의 예약 목록 출력
 		System.out.println("===== " + reviewerId + "의 예약 목록 =====");
-		printReservations(reservationDao.checkReservation(reviewerId));
+		printReservations(reservationDao.findReservationByReviewerId(reviewerId));
 
 		// 5. 리뷰어의 리뷰 목록 출력
 		System.out.println("===== " + reviewerId + "의 리뷰 목록 =====");
@@ -102,7 +102,7 @@ public class DAOTest {
 
 		// 8. 등록 후 예약 목록 다시 출력
 		System.out.println("===== 등록 후 " + reviewerId + "의 예약 목록 =====");
-		printReservations(reservationDao.checkReservation(reviewerId));
+		printReservations(reservationDao.findReservationByReviewerId(reviewerId));
 
 		scanner.close();
 	}
