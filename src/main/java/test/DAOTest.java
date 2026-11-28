@@ -28,7 +28,7 @@ public class DAOTest {
 
 		// 1. 전체 식당 목록 출력 (DB 연결 확인)
 		System.out.println("===== 전체 식당 목록 =====");
-		List<Restaurant> restaurantList = restaurantDao.getAllRestaurants();
+		List<Restaurant> restaurantList = restaurantDao.getRestaurantList();
 		if (restaurantList == null) {
 			System.out.println("식당 목록 조회 실패 (DB 연결 또는 dbinfo.properties 확인)");
 			scanner.close();
