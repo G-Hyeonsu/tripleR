@@ -14,12 +14,6 @@
                 <h1>회원가입</h1>
 
                 <div class="form-group">
-                    <label for="profile-image">프로필 이미지</label>
-                    <input type="file" id="profile-image" name="profileImage" accept="image/*">
-                    <img id="image-preview" class="image-preview" src="#" alt="이미지 미리보기">
-                </div>
-
-                <div class="form-group">
                     <label for="name">이름</label>
                     <input type="text" id="name" name="name" maxlength="26" required>
                 </div>
