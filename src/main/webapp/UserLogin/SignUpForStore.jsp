@@ -48,19 +48,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="bank">계좌</label>
-                    <div class="input-group account-group">
-                        <select id="bank" name="bank">
-                            <option value="">은행 선택</option>
-                            <option value="국민은행">국민은행</option>
-                            <option value="신한은행">신한은행</option>
-                            <option value="카카오뱅크">카카오뱅크</option>
-                        </select>
-                        <input type="text" id="account-number" name="accountNumber" placeholder="계좌번호">
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="address">주소</label>
                     <input type="text" id="address" name="address" required>
                 </div>
