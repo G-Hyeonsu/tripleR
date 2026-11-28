@@ -14,12 +14,6 @@
                 <h1>회원가입</h1>
 
                 <div class="form-group">
-                    <label for="profile-image">프로필 이미지</label>
-                    <input type="file" id="profile-image" name="profileImage" accept="image/*">
-                    <img id="image-preview" class="image-preview" src="#" alt="이미지 미리보기">
-                </div>
-
-                <div class="form-group">
                     <label for="name">이름</label>
                     <input type="text" id="name" name="name" maxlength="26" required>
                 </div>
@@ -51,19 +45,6 @@
                 <div class="form-group">
                     <label for="nickname">닉네임</label>
                     <input type="text" id="nickname" name="nickname" maxlength="30" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="bank">계좌</label>
-                    <div class="input-group account-group">
-                        <select id="bank" name="bank">
-                            <option value="">은행 선택</option>
-                            <option value="국민은행">국민은행</option>
-                            <option value="신한은행">신한은행</option>
-                            <option value="카카오뱅크">카카오뱅크</option>
-                        </select>
-                        <input type="text" id="account-number" name="accountNumber" placeholder="계좌번호">
-                    </div>
                 </div>
 
                 <div class="form-group">
